@@ -183,6 +183,7 @@ Player::Player(WorldSession *session) :
     m_ExtraFlags(0),
     m_comboPoints(0),
     m_usedTalentCount(0),
+    m_questRewardTalentCount(0),
     m_regenTimerCount(0),
     m_weaponChangeTimer(0),
     m_zoneUpdateId(MAP_INVALID_ZONE),
@@ -2806,7 +2807,8 @@ void Player::InitTalentForLevel()
     }
     else
     {
-        uint32 talentPointsForLevel = uint32((level-9)*sWorld->GetRate(RATE_TALENT));
+        uint32 talentPointsForLevel = CalculateTalentsPoints();
+	    
         // if used more that have then reset
         if(m_usedTalentCount > talentPointsForLevel)
         {
@@ -3960,7 +3962,7 @@ bool Player::ResetTalents(bool no_cost)
     }
 
     uint32 level = GetLevel();
-    uint32 talentPointsForLevel = level < 10 ? 0 : uint32((level-9)*sWorld->GetRate(RATE_TALENT));
+    uint32 talentPointsForLevel = CalculateTalentsPoints();
 
     if (m_usedTalentCount == 0)
     {
@@ -23881,4 +23883,20 @@ std::string Player::GetDebugInfo() const
     std::stringstream sstr;
     sstr << Unit::GetDebugInfo();
     return sstr.str();
+}
+
+uint32 Player::CalculateTalentsPoints() const
+{
+	uint32 base_talent = GetLevel() < 10 ? 0 : GetLevel() - 9;
+
+	if (GetClass() != CLASS_DEATH_KNIGHT || GetMapId() != 609)
+		return uint32(base_talent * sWorld->GetRate(RATE_TALENT));
+
+	uint32 talentPointsForLevel = GetLevel() < 56 ? 0 : GetLevel() - 55;
+	talentPointsForLevel += m_questRewardTalentCount;
+
+	if (talentPointsForLevel > base_talent)
+		talentPointsForLevel = base_talent;
+
+	return uint32(talentPointsForLevel * sWorld->GetRate(RATE_TALENT));
 }
