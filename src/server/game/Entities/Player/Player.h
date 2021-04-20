@@ -1720,6 +1720,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SendTalentsInfoData(bool pet);
 #endif
         void LearnTalent(uint32 talentId, uint32 talentRank);
+        uint32 CalculateTalentsPoints() const;
 
         uint32 GetFreePrimaryProfessionPoints() const { return GetUInt32Value(PLAYER_CHARACTER_POINTS2); }
         void SetFreePrimaryProfessions(uint16 profs) { SetUInt32Value(PLAYER_CHARACTER_POINTS2, profs); }
@@ -2662,6 +2663,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         uint32 m_resetTalentsCost;
         time_t m_resetTalentsTime;
         uint32 m_usedTalentCount;
+        uint32 m_questRewardTalentCount;
 
         // Social
         PlayerSocial *m_social;

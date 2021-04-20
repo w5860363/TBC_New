@@ -56,17 +56,16 @@ public:
         uint32 RageEncounter = ai->GetInstanceData(DATA_RAGEWINTERCHILLEVENT);
         uint32 AnetheronEncounter = ai->GetInstanceData(DATA_ANETHERONEVENT);
         if (RageEncounter == NOT_STARTED)
-            ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN_ALLY, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+			AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN_ALLY, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
         else if (RageEncounter == DONE && AnetheronEncounter == NOT_STARTED)
-            ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_ANETHERON, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+			AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_ANETHERON, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         else if (RageEncounter == DONE && AnetheronEncounter == DONE)
-            ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_RETREAT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+			AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_RETREAT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
 
         if (player->IsGameMaster())
-            ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_ITEM_GM1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+        AddGossipItemFor(player, GOSSIP_ICON_TRAINER, GOSSIP_ITEM_GM1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 
-        //SendGossipMenuFor(player, 907, creature->GetGUID());
-        SendGossipMenuFor(player, 907, creature);
+		SendGossipMenuFor(player, 907, creature->GetGUID());
         return true;
     }
 
@@ -141,18 +140,17 @@ public:
             uint32 KazrogalEvent = ai->GetInstanceData(DATA_KAZROGALEVENT);
             uint32 AzgalorEvent  = ai->GetInstanceData(DATA_AZGALOREVENT);
             if (KazrogalEvent == NOT_STARTED)
-                ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN_HORDE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+				AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN_HORDE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
             else if (KazrogalEvent == DONE && AzgalorEvent == NOT_STARTED)
-                ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_AZGALOR, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+				AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_AZGALOR, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
             else if (AzgalorEvent == DONE)
-                ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_RETREAT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+				AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ITEM_RETREAT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
         }
 
         if (player->IsGameMaster())
-            ;// player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_ITEM_GM1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+			AddGossipItemFor(player, GOSSIP_ICON_TRAINER, GOSSIP_ITEM_GM1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 
-        //SendGossipMenuFor(player, 907, creature->GetGUID());
-        SendGossipMenuFor(player, 907, creature);
+        SendGossipMenuFor(player, 907, creature->GetGUID());
         return true;
     }
 
